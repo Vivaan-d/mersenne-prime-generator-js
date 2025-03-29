@@ -33,25 +33,18 @@
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
                         return false;
-                        break;
-                    } else {
-                        return true
                     }
-                    
                 }
             } else if (Number.isInteger((n+1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
                         return false;
-                        break;
-                    } else {
-                        return true
                     }
                 }
             } else {
                 return false;
             }
-
+            return true;
         }
         generate = async () => {
             for (var x=1;true;x++){
@@ -64,7 +57,7 @@
             await new Promise((resolve) => setTimeout(resolve, 50));
         }
     }
-    gemerate()
+    generate()
     </script>
 </body>
 </html>
