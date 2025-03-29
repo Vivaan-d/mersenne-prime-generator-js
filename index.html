@@ -30,13 +30,13 @@
     <script>
         var prime= (n)=>{
             if (Number.isInteger((n-1)/6)){
-                for (var i=1;i<Math.sqrt(n);i++){
+                for (var i=2;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
                         return false;
                     }
                 }
             } else if (Number.isInteger((n+1)/6)){
-                for (var i=1;i<Math.sqrt(n);i++){
+                for (var i=2;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
                         return false;
                     }
