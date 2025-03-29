@@ -28,39 +28,39 @@
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
     <script>var prime = (n) => {
-    if ((n - 1n) % 6n === 0n) {
-        for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
-            if (n % i === 0n) {
-                return false;
+        if (n <= 1n) return false; // Numbers <= 1 are not prime
+        if (n === 2n || n === 3n) return true; // 2 and 3 are primes
+        if (n % 2n === 0n || n % 3n === 0n) return false; // Exclude multiples of 2 and 3
+    
+        // Check divisibility using 6n ± 1 rule
+        if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
+            for (let i = 2n; i <= BigInt(Math.sqrt(Number(n))); i++) {
+                if (n % i === 0n) {
+                    return false; // Not prime if divisible
+                }
             }
+            return true; // Prime if no divisors are found
         }
-    } else if ((n + 1n) % 6n === 0n) {
-        for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
-            if (n % i === 0n) {
-                return false;
+    
+        return false; // Numbers that don't satisfy 6n ± 1 are not prime
+    };
+    
+    generate = async () => {
+        for (let x = 1n; true; x++) {
+            const n = (2n ** x) - 1n;
+    
+            if (prime(n)) {
+                document.querySelector(".primes").innerHTML += ", " + n;
+            } else {
+                document.querySelector(".composites").innerHTML += n + ", ";
             }
+    
+            await new Promise((resolve) => setTimeout(resolve, 50)); // Add delay to prevent freezing
         }
-    } else {
-        return false;
-    }
-    return true;
-};
-
-generate = async () => {
-    for (var x = 1n; true; x++) {
-        const n = (2n ** x) - 1n;
-
-        if (prime(n)) {
-            document.querySelector(".primes").innerHTML += ", " + n;
-        } else {
-            document.querySelector(".composites").innerHTML += n + ", ";
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, 50));
-    }
-};
-
-generate();
+    };
+    
+    generate();
+    
 
     </script>
 </body>
