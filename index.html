@@ -26,7 +26,7 @@
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
     <script>
-        var prime= async(n)=>{
+        var prime= (n)=>{
             if (Number.isInteger((n-1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
@@ -35,7 +35,7 @@
                     } else {
                         return true
                     }
-                    await new Promise((resolve) => setTimeout(resolve, 50));
+                    
                 }
             } else if (Number.isInteger((n+1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
