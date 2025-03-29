@@ -21,55 +21,55 @@
             background-color: rgb(255, 190, 190);
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.5.0/math.min.js"></script>
 </head>
 <body>
     <h1>hi</h1>
     <p>this generator gives you prime numbers<br>
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
-    <script>var prime = (n) => {
-        if (n <= 1) return false; // 1 is not prime
-        if (n === 2 || n === 3) return true; // 2 and 3 are prime
-        if (n % 2 === 0 || n % 3 === 0) return false; // Exclude multiples of 2 and 3
-    
-        // Check divisibility using the 6n ± 1 rule
-        if (Number.isInteger((n - 1) / 6) || Number.isInteger((n + 1) / 6)) {
-            const limit = Math.floor(Math.sqrt(n)); // Calculate square root as an integer
-            for (let i = 2; i <= limit; i++) {
-                if (n % i === 0) {
-                    return false; // Not prime if divisible
+    <script>
+        
+        var prime = (n) => {
+            // Convert n to a BigNumber
+            n = math.bignumber(n);
+        
+            // Check 6n ± 1 rule using Math.js for arbitrary precision
+            if (math.mod(math.subtract(n, 1), 6).equals(0) || math.mod(math.add(n, 1), 6).equals(0)) {
+                // Get the square root of n as a BigNumber
+                const limit = math.sqrt(n);
+        
+                for (let i = math.bignumber(2); math.largerEq(i, limit) === false; i = math.add(i, 1)) {
+                    if (math.mod(n, i).equals(0)) {
+                        return false; // Not prime if divisible
+                    }
                 }
+                return true; // Prime if no divisors are found
             }
-            return true; // Prime if no divisors are found
-        }
-    
-        return false; // Doesn't satisfy 6n ± 1 rule
-    };
-    
-    generate = async () => {
-        for (var x = 1; x <= 53; x++) { // Limit iterations to Number.MAX_SAFE_INTEGER
-            const n = Math.pow(2, x) - 1; // Generate Mersenne number
-    
-            if (n > Number.MAX_SAFE_INTEGER) {
-                console.log(`Skipping ${n} as it exceeds Number.MAX_SAFE_INTEGER`);
-                break; // Stop if the number is too large
+        
+            return false; // Doesn't satisfy 6n ± 1 rule
+        };
+        
+        generate = async () => {
+            for (var x = 1; true; x++) {
+                // Calculate 2^x - 1 as a BigNumber
+                const n = math.subtract(math.pow(2, x), 1);
+        
+                console.log(`Testing ${n}`); // Debugging output
+        
+                if (prime(n)) {
+                    console.log(`${n} is prime`);
+                    document.querySelector(".primes").innerHTML += ", " + n;
+                } else {
+                    console.log(`${n} is composite`);
+                    document.querySelector(".composites").innerHTML += n + ", ";
+                }
+        
+                await new Promise((resolve) => setTimeout(resolve, 50)); // Add delay to prevent freezing
             }
-    
-            console.log(`Testing ${n}`); // Debugging output
-    
-            if (prime(n)) {
-                console.log(`${n} is prime`);
-                document.querySelector(".primes").innerHTML += ", " + n;
-            } else {
-                console.log(`${n} is composite`);
-                document.querySelector(".composites").innerHTML += n + ", ";
-            }
-    
-            await new Promise((resolve) => setTimeout(resolve, 50)); // Add delay
-        }
-    };
-    
-    generate();
+        };
+        
+        generate();        
     </script>
 </body>
 </html>
