@@ -34,7 +34,7 @@
     
         // Check divisibility using the 6n ± 1 rule
         if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
-            for (let i = 2n; i <= n; i++) {
+            for (let i = 2n; i <= sqrtBigInt(n); i++) {
                 if (n % i === 0n) {
                     return false; // Not prime if divisible
                 }
@@ -44,17 +44,16 @@
     
         return false; // Doesn't satisfy 6n ± 1 rule
     };
-    
-    // Custom BigInt square root function
     const sqrtBigInt = (value) => {
-        let x = value;
-        let y = (x + 1n) / 2n;
-        while (y < x) {
-            x = y;
-            y = (x + value / x) / 2n;
-        }
-        return x;
-    };
+    let x = value;
+    let y = (x + 1n) / 2n;
+    while (y < x) {
+        x = y;
+        y = (x + value / x) / 2n;
+    }
+    return x;
+};
+
     
     generate = async () => {
         for (var x = 1n; x <= 25n; x++) { // Increase loop range as needed
