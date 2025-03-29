@@ -32,7 +32,7 @@
         if (n === 2n || n === 3n) return true; // 2 and 3 are prime
         if (n % 2n === 0n || n % 3n === 0n) return false; // Exclude multiples of 2 and 3
     
-        // Check divisibility using 6n ± 1 rule
+        // Check divisibility using the 6n ± 1 rule
         if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
             for (let i = 2n; i <= sqrtBigInt(n); i++) {
                 if (n % i === 0n) {
@@ -45,6 +45,7 @@
         return false; // Doesn't satisfy 6n ± 1 rule
     };
     
+    // Custom BigInt square root function
     const sqrtBigInt = (value) => {
         let x = value;
         let y = (x + 1n) / 2n;
@@ -56,8 +57,8 @@
     };
     
     generate = async () => {
-        for (var x = 1n; x <= 20n; x++) { // Limit loop to prevent infinite execution
-            const n = (2n ** x) - 1n; // Generate Mersenne number with BigInt
+        for (var x = 1n; x <= 25n; x++) { // Increase loop range as needed
+            const n = (2n ** x) - 1n; // Generate Mersenne number
     
             if (prime(n)) {
                 document.querySelector(".primes").innerHTML += ", " + n;
