@@ -28,13 +28,13 @@
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
     <script>var prime = (n) => {
-    if (Number.isInteger((n - 1n) / 6n)) {
+    if ((n - 1n) % 6n === 0n) {
         for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
             if (n % i === 0n) {
                 return false;
             }
         }
-    } else if (Number.isInteger((n + 1n) / 6n)) {
+    } else if ((n + 1n) % 6n === 0n) {
         for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
             if (n % i === 0n) {
                 return false;
