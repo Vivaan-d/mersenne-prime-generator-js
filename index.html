@@ -28,13 +28,13 @@
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
     <script>var prime = (n) => {
-        if (n <= 1n) return false; // Numbers <= 1 are not prime
-        if (n === 2n || n === 3n) return true; // 2 and 3 are primes
+        if (n <= 1n) return false; // 1 is not prime
+        if (n === 2n || n === 3n) return true; // 2 and 3 are prime
         if (n % 2n === 0n || n % 3n === 0n) return false; // Exclude multiples of 2 and 3
     
         // Check divisibility using 6n ± 1 rule
         if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
-            for (let i = 2n; i <= BigInt(Math.sqrt(Number(n))); i++) {
+            for (let i = 2n; i <= sqrtBigInt(n); i++) {
                 if (n % i === 0n) {
                     return false; // Not prime if divisible
                 }
@@ -42,12 +42,22 @@
             return true; // Prime if no divisors are found
         }
     
-        return false; // Numbers that don't satisfy 6n ± 1 are not prime
+        return false; // Doesn't satisfy 6n ± 1 rule
+    };
+    
+    const sqrtBigInt = (value) => {
+        let x = value;
+        let y = (x + 1n) / 2n;
+        while (y < x) {
+            x = y;
+            y = (x + value / x) / 2n;
+        }
+        return x;
     };
     
     generate = async () => {
-        for (let x = 1n; true; x++) {
-            const n = (2n ** x) - 1n;
+        for (var x = 1n; x <= 20n; x++) { // Limit loop to prevent infinite execution
+            const n = (2n ** x) - 1n; // Generate Mersenne number with BigInt
     
             if (prime(n)) {
                 document.querySelector(".primes").innerHTML += ", " + n;
@@ -61,7 +71,6 @@
     
     generate();
     
-
     </script>
 </body>
 </html>
