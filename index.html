@@ -49,11 +49,13 @@
 generate = async () => {
     for (var x = 1n; true; x++) {
         const n = (2n ** x) - 1n;
+
         if (prime(n)) {
             document.querySelector(".primes").innerHTML += ", " + n;
         } else {
             document.querySelector(".composites").innerHTML += n + ", ";
         }
+
         await new Promise((resolve) => setTimeout(resolve, 50));
     }
 };
