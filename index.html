@@ -27,50 +27,37 @@
     <p>this generator gives you prime numbers<br>
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
-    <script>var prime = (n) => {
-        if (n <= 1n) return false; // 1 is not prime
-        if (n === 2n || n === 3n) return true; // 2 and 3 are prime
-        if (n % 2n === 0n || n % 3n === 0n) return false; // Exclude multiples of 2 and 3
-    
-        // Check divisibility using the 6n ± 1 rule
-        if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
-            for (let i = 2n; i <= BigInt(n); i++) {
-                if (n % i === 0n) {
-                    return false; // Not prime if divisible
+    <script>
+        var prime= (n)=>{
+            if (Number.isInteger((n-1)/6)){
+                for (var i=2;i<Math.sqrt(n);i++){
+                    if (Number.isInteger(n/i)){
+                        return false;
+                    }
                 }
-            }
-            return true; // Prime if no divisors are found
-        }
-    
-        return false; // Doesn't satisfy 6n ± 1 rule
-    };
-    const sqrtBigInt = (value) => {
-    let x = value;
-    let y = (x + 1n) / 2n;
-    while (y < x) {
-        x = y;
-        y = (x + value / x) / 2n;
-    }
-    return x;
-};
-
-    
-    generate = async () => {
-        for (var x = 1n; x <= 25n; x++) { // Increase loop range as needed
-            const n = (2n ** x) - 1n; // Generate Mersenne number
-    
-            if (prime(n)) {
-                document.querySelector(".primes").innerHTML += ", " + n;
+            } else if (Number.isInteger((n+1)/6)){
+                for (var i=2;i<Math.sqrt(n);i++){
+                    if (Number.isInteger(n/i)){
+                        return false;
+                    }
+                }
             } else {
-                document.querySelector(".composites").innerHTML += n + ", ";
+                return false;
             }
-    
-            await new Promise((resolve) => setTimeout(resolve, 50)); // Add delay to prevent freezing
+            return true;
         }
-    };
-    
-    generate();
-    
+        generate = async () => {
+            for (var x=1;true;x++){
+            n=2**x-1
+            if (prime(n)){
+                document.querySelector(".primes").innerHTML += ", " + n
+            } else {
+                document.querySelector(".composites").innerHTML += n + ", "
+            }
+            await new Promise((resolve) => setTimeout(resolve, 50));
+        }
+    }
+    generate()
     </script>
 </body>
 </html>
