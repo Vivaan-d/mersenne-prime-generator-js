@@ -27,37 +27,39 @@
     <p>this generator gives you prime numbers<br>
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
-    <script>
-        var prime= (n)=>{
-            if (Number.isInteger((n-1)/6)){
-                for (var i=2;i<Math.sqrt(n);i++){
-                    if (Number.isInteger(n/i)){
-                        return false;
-                    }
-                }
-            } else if (Number.isInteger((n+1)/6)){
-                for (var i=2;i<Math.sqrt(n);i++){
-                    if (Number.isInteger(n/i)){
-                        return false;
-                    }
-                }
-            } else {
+    <script>var prime = (n) => {
+    if (Number.isInteger((n - 1n) / 6n)) {
+        for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
+            if (n % i === 0n) {
                 return false;
             }
-            return true;
         }
-        generate = async () => {
-            for (var x=1;true;x++){
-            n=2**x-1
-            if (prime(n)){
-                document.querySelector(".primes").innerHTML += ", " + n
-            } else {
-                document.querySelector(".composites").innerHTML += n + ", "
+    } else if (Number.isInteger((n + 1n) / 6n)) {
+        for (var i = 2n; i < BigInt(Math.sqrt(Number(n))); i++) {
+            if (n % i === 0n) {
+                return false;
             }
-            await new Promise((resolve) => setTimeout(resolve, 50));
         }
+    } else {
+        return false;
     }
-    generate()
+    return true;
+};
+
+generate = async () => {
+    for (var x = 1n; true; x++) {
+        const n = (2n ** x) - 1n;
+        if (prime(n)) {
+            document.querySelector(".primes").innerHTML += ", " + n;
+        } else {
+            document.querySelector(".composites").innerHTML += n + ", ";
+        }
+        await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+};
+
+generate();
+
     </script>
 </body>
 </html>
