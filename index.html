@@ -34,7 +34,7 @@
     
         // Check divisibility using the 6n ± 1 rule
         if ((n - 1n) % 6n === 0n || (n + 1n) % 6n === 0n) {
-            for (let i = 2n; i <= sqrtBigInt(n); i++) {
+            for (let i = 2n; i <= BigInt(n); i++) {
                 if (n % i === 0n) {
                     return false; // Not prime if divisible
                 }
