@@ -26,7 +26,7 @@
     Mersenne prime numbers</p>
     <div class="primes">prime numbers - 3</div><div class="composites">composite numbers - </div>
     <script>
-        var prime=(n)=>{
+        var prime= async(n)=>{
             if (Number.isInteger((n-1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
@@ -35,6 +35,7 @@
                     } else {
                         return true
                     }
+                    await new Promise((resolve) => setTimeout(resolve, 50));
                 }
             } else if (Number.isInteger((n+1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
@@ -50,14 +51,18 @@
             }
 
         }
-        for (var x=1;true;x++){
+        generate = async () => {
+            for (var x=1;true;x++){
             n=2**x-1
             if (prime(n)){
                 document.querySelector(".primes").innerHTML += ", " + n
             } else {
                 document.querySelector(".composites").innerHTML += n + ", "
             }
+            await new Promise((resolve) => setTimeout(resolve, 50));
         }
+    }
+    gemerate()
     </script>
 </body>
 </html>
