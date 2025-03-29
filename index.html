@@ -30,15 +30,19 @@
             if (Number.isInteger((n-1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
-                        return true;
+                        return false;
                         break;
+                    } else {
+                        return true
                     }
                 }
             } else if (Number.isInteger((n+1)/6)){
                 for (var i=1;i<Math.sqrt(n);i++){
                     if (Number.isInteger(n/i)){
-                        return true;
+                        return false;
                         break;
+                    } else {
+                        return true
                     }
                 }
             } else {
